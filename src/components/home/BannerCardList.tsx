@@ -32,21 +32,27 @@ const cards = [
 export default function BannerCardList() {
   const containerRef = useRef(null);
 
-  const color = "white";
-
-  useEffect(() => {
-    function mouseMoveEvent(e) {
+  const mouseMoveEvent = useCallback(
+    (e) => {
+      if (!containerRef.current) return;
       const { x, y } = containerRef.current.getBoundingClientRect();
       containerRef.current.style.setProperty("--px", e.clientX - x);
       containerRef.current.style.setProperty("--py", e.clientY - y);
-      color && containerRef.current.style.setProperty("--color", color);
+      containerRef.current.style.setProperty("--color", "white");
+    },
+    [containerRef]
+  );
+
+  useEffect(() => {
+    if (containerRef.current) {
+      containerRef.current.addEventListener("mousemove", mouseMoveEvent);
     }
-    containerRef.current.addEventListener("mousemove", mouseMoveEvent);
 
     return () => {
-      containerRef.current.removeEventListener("mousemove", mouseMoveEvent);
+      if (containerRef.current)
+        containerRef.current.removeEventListener("mousemove", mouseMoveEvent);
     };
-  }, []);
+  }, [containerRef, mouseMoveEvent]);
 
   return (
     <div
