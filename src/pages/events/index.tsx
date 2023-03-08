@@ -7,23 +7,27 @@ interface EventsProps {
 }
 
 export default function Home({ concerts }: EventsProps) {
+  const concertsComponent = concerts.map((concert) => {
+    const { title, date, place, image, id } = concert;
+    return (
+      <Post
+        key={id}
+        id={id}
+        title={title}
+        date={date}
+        place={place}
+        image={image}
+      />
+    );
+  });
+
+  const loadingFail = <h1>Loading Failed</h1>;
+
   return (
     <div>
       <Header />
       <div className='flex gap-10 justify-around'>
-        {concerts.map((concert) => {
-          const { title, date, place, image, id } = concert;
-          return (
-            <Post
-              key={id}
-              id={id}
-              title={title}
-              date={date}
-              place={place}
-              image={image}
-            />
-          );
-        })}
+        {concerts.length == 0 ? loadingFail : concertsComponent}
       </div>
     </div>
   );
