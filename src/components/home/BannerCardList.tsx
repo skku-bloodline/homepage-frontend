@@ -16,10 +16,10 @@ const cards = [
     image: "/assets/images/events.jpg",
   },
   {
-    title: "Register",
+    title: "Apply",
     description: "혈통과 함께 새롭고 멋진 경험을 쌓아보세요",
-    link: "/register",
-    image: "/assets/images/register.jpg",
+    link: "/apply",
+    image: "/assets/images/apply.jpg",
   },
   {
     title: "Contact us",

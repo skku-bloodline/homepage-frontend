@@ -1,11 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 interface HeaderProp {
   hide: boolean;
 }
 
 export default function Header({ hide }: HeaderProp) {
+  const router = useRouter();
   const links = [
     {
       href: "/about",
@@ -16,8 +18,8 @@ export default function Header({ hide }: HeaderProp) {
       text: "Events",
     },
     {
-      href: "/register",
-      text: "Register",
+      href: "/apply",
+      text: "Apply",
     },
     {
       href: "/contact",
@@ -32,7 +34,7 @@ export default function Header({ hide }: HeaderProp) {
   const bgColor = hide ? "" : "bg-black";
 
   return (
-    <div
+    <header
       className={`h-25 flex justify-between fixed top-0 w-screen ${bgColor}`}
     >
       <div className='flex flex-col justify-center items-center'>
@@ -49,17 +51,19 @@ export default function Header({ hide }: HeaderProp) {
       <div className='flex flex-row items-center justify-start mx-10'>
         {links.map((link, idx) => {
           const { href, text } = link;
+          const color = router.pathname == href ? "text-red-500" : "text-white";
+          console.log(router.pathname == href);
           return (
             <Link
               href={href}
               key={idx}
-              className='mx-3 text-xl font-light'
+              className={`mx-3 text-xl font-light ${color}`}
             >
               {text}
             </Link>
           );
         })}
       </div>
-    </div>
+    </header>
   );
 }
