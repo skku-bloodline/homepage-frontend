@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
+import styles from "@/styles/About.module.css";
 
 export default function About() {
   const [scrollLocation, setScrollLocation] = useState(0);
@@ -29,13 +30,14 @@ export default function About() {
           alt='hero'
           className='-z-10 opacity-70'
         />
-
-        <h1 className='text-xl z-20 white'>화려한 혈통</h1>
       </div>
-
+      <h1 className={`z-20 white absolute bottom-40 left-20 ${styles.header}`}>
+        화려한 혈통
+      </h1>
       {scrollLocation > 200 ? <Header hide={false} /> : <Header hide />}
 
-      <p>
+      <div className='w-3/4 mx-auto my-40'>
+        <h1 className='text-5xl'>Our band</h1>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Sit veniam
         magni commodi nemo porro molestiae quo vitae? Dicta alias amet molestiae
         tempore pariatur error distinctio commodi recusandae repellendus a?
@@ -69,7 +71,7 @@ export default function About() {
         inventore consequatur? Totam, nostrum nemo, voluptatum aperiam fuga sit
         eveniet ab labore ducimus enim neque hic non unde inventore, molestias
         quo! Vero quas neque a beatae atque nam eos eius molestiae at?
-      </p>
+      </div>
       <Footer />
     </>
   );
